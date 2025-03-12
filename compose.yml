@@ -1,0 +1,16 @@
+name: fiction
+
+services:
+  backend:
+    build:
+      context: ./backend
+      target: development
+    env_file:
+      - ./env/backend.env
+      - ./env/db.env
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/app
+
+# TODO: add mysql db
