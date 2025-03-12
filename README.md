@@ -17,7 +17,6 @@ Template: `<type>(scope): <description>`
 - test: Adding missing tests or correcting existing tests
 
 
-
 # Makefile
 
 | Command     | Description                                         |

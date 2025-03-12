@@ -13,4 +13,12 @@ services:
     volumes:
       - ./backend:/app
 
-# TODO: add mysql db
+  db:
+    image: mysql:9.2
+    restart: always
+    env_file:
+      - ./env/db.env
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./db:/var/lib/mysql
