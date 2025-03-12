@@ -6,7 +6,7 @@ EXEC := $(COMPOSE) exec
 .PHONY: _init_prerequisites
 
 _init_prerequisites:
-	@for cmd in docker git uv; do \
+	@for cmd in docker git; do \
 		if ! command -v $$cmd &> /dev/null; then \
 			echo "[ERROR] $$cmd is not installed. Please install it."; \
 			exit 1; \
@@ -44,4 +44,4 @@ requirements:
 	@$(EXEC) backend pip install .[dev]
 	@echo "[OK] Requirements installed successfully."
 
-init: _init_prerequisites setup venv build
+init: _init_prerequisites setup build
