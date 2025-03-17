@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f ../docker-compose.yml
+    kompose.version: 1.35.0 (HEAD)
+    vpc.amazonaws.com/assign-public-ip: "true"
+  labels:
+    io.kompose.service: proxy
+  name: proxy
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+    - name: https
+      port: 443
+      targetPort: 443
+  selector:
+    io.kompose.service: proxy
