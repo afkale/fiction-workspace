@@ -5,11 +5,15 @@ services:
     build:
       context: ./backend
       target: development
+    restart: always
     env_file:
       - ./env/backend.env
       - ./env/db.env
     ports:
       - 8000:8000
+    depends_on:
+      db:
+        condition: service_healthy
     volumes:
       - ./backend:/app
 
@@ -19,6 +23,20 @@ services:
     env_file:
       - ./env/db.env
     ports:
-      - '3306:3306'
+      - 3306:3306
     volumes:
       - ./db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      retries: 5
+      start_period: 20s
+  proxy:
+    image: nginx:1.27-alpine
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
