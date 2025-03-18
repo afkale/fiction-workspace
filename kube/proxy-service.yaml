@@ -5,6 +5,8 @@ metadata:
     kompose.cmd: kompose convert -f ../docker-compose.yml
     kompose.version: 1.35.0 (HEAD)
     vpc.amazonaws.com/assign-public-ip: "true"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
   labels:
     io.kompose.service: proxy
   name: proxy

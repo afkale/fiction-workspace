@@ -52,6 +52,11 @@ spec:
                 configMapKeyRef:
                   key: MYSQL_USER
                   name: db-env
+            - name: CSRF_TRUSTED_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  key: CSRF_TRUSTED_ORIGINS
+                  name: backend-env
           image: 324037305789.dkr.ecr.eu-north-1.amazonaws.com/fiction:0.1.0
           imagePullPolicy: Always
           name: backend
