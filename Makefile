@@ -15,7 +15,8 @@ _init_prerequisites:
 
 setup:
 	@echo "[SETUP] Downloading and updating backend."
-	@git submodule update --remote
+	@git submodule init
+	@git submodule update --remote --recursive
 	@(cd backend && git checkout main)
 	@echo "[OK] Submodule updated successfully."
 
