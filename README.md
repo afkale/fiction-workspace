@@ -7,6 +7,7 @@ Para hacer este proyecto he utilizado algunas tecnologías que suelo utilizar en
 
 
 # GIT
+[convention](https://www.conventionalcommits.org/en/v1.0.0/)
 ## BRANCHES
 Template: `<type>/<issue>/<description>`
 
