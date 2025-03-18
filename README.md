@@ -1,7 +1,8 @@
 # Dependencies
 Para hacer este proyecto he utilizado algunas tecnologías que suelo utilizar en mi dia a dia.
 
-[kompose](https://kompose.io/) sirve para generar un primer ejemplo de como deberian ser tus archivos de kubernetes a partir de tu compose.yml
+[kompose](https://kompose.io/) sirve para generar un primer ejemplo de como deberian ser tus archivos de kubernetes a partir de tu compose.yml.
+
 [uv](https://github.com/astral-sh/uv) es una herramienta genial para gestionar las dependencias en un proyecto de python.
 
 
