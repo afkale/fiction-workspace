@@ -5,6 +5,11 @@ Para hacer este proyecto he utilizado algunas tecnologías que suelo utilizar en
 
 [uv](https://github.com/astral-sh/uv) es una herramienta genial para gestionar las dependencias en un proyecto de python.
 
+# Startup
+Run the next command to start using this project.
+```sh
+make init
+```
 
 # GIT
 [convention](https://www.conventionalcommits.org/en/v1.0.0/)
