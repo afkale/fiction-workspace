@@ -18,7 +18,6 @@ Template: `<type>(scope): <description>`
 
 
 # Makefile
-
 | Command     | Description                                         |
 |-------------|-----------------------------------------------------|
 | init        | This command is used to initialize the project.     |
@@ -30,6 +29,58 @@ Template: `<type>(scope): <description>`
 | requirements| Installs required dependencies inside the container.|
 
 
+# Pasos para Desplegar en AWS EKS
+1. **Configurar el Registro de Imágenes**
+Para poder subir imágenes de Docker, primero es necesario crear un repositorio en AWS Elastic Container Registry (ECR).
+
+2. **Definir Configuración de Kubernetes**
+Se deben definir los contenedores, servicios y configmaps para asegurar el correcto funcionamiento del servicio.
+
+3. **Crear un Clúster en AWS EKS**
+Se necesita un clúster de Amazon EKS donde se desplegarán los contenedores de Docker.
+
+## Proceso de Subida y Despliegue
+1. **Iniciar sesión en AWS**
+Asegúrate de contar con las credenciales de acceso en la configuración de AWS:
+
+Archivo: `~/.aws/credentials`
+
+```ini
+[default]
+aws_access_key_id = YOUR_ACCESS_KEY_ID
+aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
+```
+
+2. **Iniciar sesión en el Docker Registry y conectar con el Clúster**
+```sh
+aws eks --region <REGION> update-kubeconfig --name <CLUSTER-NAME>
+aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <REGISTRY-ADDRESS>
+```
+
+3. **Construcción y subida de imágenes al registro**
+```sh
+# Hacer build de la imagen con las tags latest y el nombre de la tag que se va a subir.
+docker build -t <REGISTRY-ADDRESS>/<REGISTRY-PATH>:latest -t <REGISTRY-ADDRESS>/<REGISTRY-PATH>:<TAG> ./backend
+# Hacer push de todas las tags creadas previamente.
+docker push <REGISTRY-ADDRESS>/<REGISTRY-PATH> --all-tags
+```
+
+### Despliegue en Kubernetes
+#### Si la imagen ya ha sido desplegada antes:
+```sh
+# Configurar el context a utilizar.
+kubectl config use-context <CLUSTER-ARN>
+# Reiniciar el deploy del contenedor de la imagen subida.
+kubectl rollout restart deploy/<CONTAINER-NAME>
+```
+
+#### Si es la primera vez que se despliega:
+```sh
+# Configurar el context a utilizar.
+kubectl config use-context <CLUSTER-ARN>
+# Aplicar todos los yaml configurados.
+kubectl apply -f ./kube/
+```
 
 # Preguntas prueba tecnica
 Imagina que en esta aplicación adicionalmente se quiere tener métricas de
