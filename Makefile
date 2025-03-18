@@ -15,7 +15,7 @@ _init_prerequisites:
 
 setup:
 	@echo "[SETUP] Downloading and updating backend."
-	@git submodule update
+	@git submodule update --remote
 	@(cd backend && git checkout main)
 	@echo "[OK] Submodule updated successfully."
 
@@ -44,4 +44,4 @@ requirements:
 	@$(EXEC) backend pip install .[dev]
 	@echo "[OK] Requirements installed successfully."
 
-init: _init_prerequisites setup build
+init: _init_prerequisites setup venv build
